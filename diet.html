@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Plan - FitSphere</title>
+    <link rel="shortcut icon" href="./gym.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        section#diet-plan {
+            background-color: #fff;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+        section#diet-plan h2 {
+            text-align: center;
+            background-color: yellow;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .diet-section {
+            margin-bottom: 30px;
+        }
+        .diet-section h3 {
+            text-align: center;
+            background-color: yellow;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .diet-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .diet-table th, .diet-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .diet-table th {
+            background-color: #f2f2f2;
+        }
+        .pdf-button {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: yellow;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .pdf-button:hover {
+            background-color: #ffd700;
+        }
+        #personalized-diet {
+            background-color: #fff;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+        #personalized-diet h3 {
+            text-align: center;
+            background-color: yellow;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        #personalized-diet input, #personalized-diet select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #personalized-diet button {
+            padding: 10px 20px;
+            background-color: yellow;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #personalized-diet button:hover {
+            background-color: #ffd700;
+        }
+        #personalized-diet-result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <section id="top">
+        <div class="hoho">
+         <p>9319388953 | pg02@gmail.com</p>
+        </div>
+        <div class="hoho">
+         <h1>Welcome to FitSphere Gym India.</h1>
+        </div>
+        <div class="hoho">
+             <h3> Social Media Handles: 
+                <a class="link" href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a class="link" href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a class="link" href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+             </h3>    
+        </div>
+    </section>
+
+    <nav>
+        <div class="hoho">
+            <h3 class="ho"><i class="fa-solid fa-dumbbell fa-spin"></i> FitSphere</h3>
+        </div>
+        <div class="hoho">
+            <a class="hehe" href="./gym.html"> Home </a>
+            <a class="hehe" href="./workout videos.html"> Workout Videos </a>
+            <a class="hehe" href="./diet.html"> Diet </a>
+            <a class="hehe" href="./help.html"> Help </a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="personalized-diet">
+            <h3>Personalized Diet Chart Generator</h3>
+            <label for="gender">Select Gender:</label>
+            <select id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <label for="weight">Enter Your Weight (kg):</label>
+            <input type="number" id="weight" placeholder="E.g., 70">
+
+            <label for="goal">Select Goal:</label>
+            <select id="goal">
+                <option value="gain">Gain Weight</option>
+                <option value="lose">Lose Weight</option>
+                <option value="maintain">Maintain Weight</option>
+            </select>
+
+            <button onclick="generateDietChart()">Generate Diet Chart</button>
+
+            <div id="personalized-diet-result"></div>
+        </section>
+
+        <a href="#" class="pdf-button" onclick="generatePDF()">Download Personalized PDF</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FitSphere Gym India. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function generateDietChart() {
+            const gender = document.getElementById('gender').value;
+            const weight = parseInt(document.getElementById('weight').value);
+            const goal = document.getElementById('goal').value;
+
+            const resultDiv = document.getElementById('personalized-diet-result');
+
+            if (!weight || weight <= 0) {
+                resultDiv.innerHTML = '<p>Please enter a valid weight.</p>';
+                return;
+            }
+
+            let dietPlan;
+
+            if (gender === 'male') {
+                if (goal === 'gain') {
+                    dietPlan = `<h4>Male - Gain Weight</h4>
+                    <p>Recommended Calorie Intake: ${weight * 35} kcal/day</p>
+                    <ul>
+                        <li>Breakfast: Eggs, toast, and milk</li>
+                        <li>Lunch: Chicken breast, rice, and vegetables</li>
+                        <li>Dinner: Fish curry, quinoa, and salad</li>
+                    </ul>`;
+                } else if (goal === 'lose') {
+                    dietPlan = `<h4>Male - Lose Weight</h4>
+                    <p>Recommended Calorie Intake: ${weight * 20} kcal/day</p>
+                    <ul>
+                        <li>Breakfast: Oatmeal and berries</li>
+                        <li>Lunch: Grilled chicken salad</li>
+                        <li>Dinner: Lentil soup and steamed vegetables</li>
+                    </ul>`;
+                } else {
+                    dietPlan = `<h4>Male - Maintain Weight</h4>
+                    <p>Recommended Calorie Intake: ${weight * 30} kcal/day</p>
+                    <ul>
+                        <li>Breakfast: Smoothie and toast</li>
+                        <li>Lunch: Mixed vegetables and paneer</li>
+                        <li>Dinner: Whole-grain pasta with chicken</li>
+                    </ul>`;
+                }
+            } else {
+                if (goal === 'gain') {
+                    dietPlan = `<h4>Female - Gain Weight</h4>
+                    <p>Recommended Calorie Intake: ${weight * 30} kcal/day</p>
+                    <ul>
+                        <li>Breakfast: Yogurt, granola, and honey</li>
+                        <li>Lunch: Grilled fish, rice, and veggies</li>
+                        <li>Dinner: Chicken stir-fry and noodles</li>
+                    </ul>`;
+                } else if (goal === 'lose') {
+                    dietPlan = `<h4>Female - Lose Weight</h4>
+                    <p>Recommended Calorie Intake: ${weight * 18} kcal/day</p>
+                    <ul>
+                        <li>Breakfast: Smoothie with spinach and protein powder</li>
+                        <li>Lunch: Turkey wrap with vegetables</li>
+                        <li>Dinner: Salad with grilled chicken</li>
+                    </ul>`;
+                } else {
+                    dietPlan = `<h4>Female - Maintain Weight</h4>
+                    <p>Recommended Calorie Intake: ${weight * 25} kcal/day</p>
+                    <ul>
+                        <li>Breakfast: Eggs and avocado toast</li>
+                        <li>Lunch: Grilled vegetables and quinoa</li>
+                        <li>Dinner: Soup and a whole-grain sandwich</li>
+                    </ul>`;
+                }
+            }
+
+            resultDiv.innerHTML = dietPlan;
+        }
+
+        function generatePDF() {
+            const element = document.getElementById('personalized-diet');
+            const opt = {
+                margin: 1,
+                filename: 'FitSphere_Personalized_Diet.pdf',
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</body>
+</html>
